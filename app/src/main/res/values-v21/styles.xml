@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:navigationBarColor">@color/colorNavigationBar</item>
+    </style>
+
+</resources>

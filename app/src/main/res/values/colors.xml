@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorStatusBar">#ff80cbc4</color>
+    <color name="colorToolbar">#ff009688</color>
+    <color name="colorWindowBg">#ffebebeb</color>
+    <color name="colorNavigationBar">@color/colorStatusBar</color>
+
+    <color name="colorText">#ff353535</color>
+    <color name="colorButtonBg">#ff80cbc4</color>
+</resources>

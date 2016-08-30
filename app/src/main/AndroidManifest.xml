@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.baidu.naviauto">
+          package="com.damocles">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -16,7 +16,7 @@
 
     <application
             android:name="com.damocles.android.base.DamoclesApplication"
-            android:allowBackup="true"
+            android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:supportsRtl="true"
@@ -47,12 +47,15 @@
         <activity android:name="com.damocles.sample.VehicleActivity"/>
         <activity android:name="com.damocles.sample.AnimationActivity"/>
         <activity android:name="com.damocles.sample.RecyclerViewActivity"/>
+        <activity android:name="com.damocles.sample.BNDemoGuideActivity"
+                  android:screenOrientation="landscape"/>
+        <activity android:name="com.damocles.sample.NaviActivity"
+                  android:screenOrientation="landscape"/>
         <activity android:name="com.damocles.sample.NightModeActivity"
                   android:configChanges="uiMode"/>
-        <activity android:name="com.damocles.sample.WechatActivity"/>
-        <activity android:name="com.damocles.sample.WechatContactActivity"/>
 
         <service android:name="com.damocles.sample.service.MyService"/>
+
     </application>
 
 </manifest>

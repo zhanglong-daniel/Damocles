@@ -1,6 +1,6 @@
 package com.damocles.android.view;
 
-import com.baidu.naviauto.R;
+import com.damocles.R;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;

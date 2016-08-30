@@ -1,6 +1,6 @@
 package com.damocles.sample;
 
-import com.baidu.naviauto.R;
+import com.damocles.R;
 import com.damocles.sample.util.Utils;
 
 import android.animation.ObjectAnimator;

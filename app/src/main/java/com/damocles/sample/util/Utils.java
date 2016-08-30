@@ -1,6 +1,6 @@
 package com.damocles.sample.util;
 
-import com.baidu.naviauto.R;
+import com.damocles.R;
 import com.damocles.android.util.DeviceInfoUtils;
 
 import android.app.Activity;

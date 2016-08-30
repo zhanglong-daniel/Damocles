@@ -1,6 +1,6 @@
 package com.damocles.sample;
 
-import com.baidu.naviauto.R;
+import com.damocles.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;

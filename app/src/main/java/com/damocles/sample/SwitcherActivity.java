@@ -2,7 +2,7 @@ package com.damocles.sample;
 
 import java.util.Random;
 
-import com.baidu.naviauto.R;
+import com.damocles.R;
 import com.damocles.sample.util.Utils;
 
 import android.os.Bundle;

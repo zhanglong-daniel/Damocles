@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import com.baidu.naviauto.R;
+import com.damocles.R;
 import com.damocles.android.bluetooth.BlueToothWrapper;
 import com.damocles.sample.util.Utils;
 

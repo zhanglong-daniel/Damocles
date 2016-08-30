@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.w3c.dom.Text;
-import com.baidu.naviauto.R;
+import com.damocles.R;
 import com.damocles.sample.recyclerview.DividerGridItemDecoration;
 import com.damocles.sample.recyclerview.DividerItemDecoration;
 import com.damocles.sample.util.Utils;

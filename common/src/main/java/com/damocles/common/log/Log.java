@@ -13,14 +13,18 @@ import android.text.TextUtils;
  */
 public final class Log {
 
-    private static final String LOG_TAG = Constants.LOG_TAG;
+    private static String LOG_TAG = Constants.LOG_TAG;
 
     private static final boolean LOG_ENABLE = true;
 
     private static final int ENABLE_PRIORITY = android.util.Log.VERBOSE;
 
     private Log() {
+        setLogTag(Constants.LOG_TAG);
+    }
 
+    public static void setLogTag(String tag) {
+        LOG_TAG = tag;
     }
 
     public static int v(String msg) {

@@ -1,6 +1,6 @@
 package com.damocles.sample;
 
-import com.baidu.naviauto.R;
+import com.damocles.R;
 import com.damocles.android.base.DamoclesApplication;
 import com.damocles.sample.util.Utils;
 

@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLConnection;
 
-import com.baidu.naviauto.R;
+import com.damocles.R;
 import com.damocles.sample.util.Utils;
 
 import android.content.Intent;

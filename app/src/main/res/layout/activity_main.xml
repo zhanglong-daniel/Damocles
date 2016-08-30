@@ -30,9 +30,17 @@
                     android:text="LinearLayout size"
                     android:layout_margin="5dp"/>
             <Button
+                    android:onClick="onNaviClick"
+                    style="@style/Button.Main"
+                    android:text="百度导航sdk"/>
+            <Button
+                    android:onClick="onHomeClick"
+                    style="@style/Button.Main"
+                    android:text="模拟Home键"/>
+            <Button
                     android:onClick="onWechatClick"
                     style="@style/Button.Main"
-                    android:text="Wechat"/>
+                    android:text="打开微信助手"/>
             <Button
                     android:onClick="onNightModeClick"
                     style="@style/Button.Main"

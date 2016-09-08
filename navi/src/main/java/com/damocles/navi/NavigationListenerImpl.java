@@ -9,7 +9,7 @@ import com.damocles.common.log.Log;
  */
 public class NavigationListenerImpl implements BNRouteGuideManager.OnNavigationListener {
 
-    private final static String LOG_TAG = NaviUtils.LOG_TAG;
+    private final static String LOG_TAG = "navi";
 
     private NaviCallback mCallback;
 

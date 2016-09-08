@@ -15,6 +15,7 @@ import com.baidu.navisdk.adapter.BaiduNaviManager;
 import com.baidu.navisdk.adapter.NaviModuleFactory;
 import com.baidu.navisdk.adapter.NaviModuleImpl;
 import com.damocles.common.log.Log;
+import com.damocles.common.util.CommonUtils;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -27,9 +28,9 @@ import android.view.View;
  */
 public class NaviSdkWrapper {
 
-    private final static String LOG_TAG = NaviUtils.LOG_TAG;
+    private final static String LOG_TAG = "navi";
 
-    private static final String APP_FOLDER_NAME = "wechathelper_BNSDK";
+    private static final String APP_FOLDER_NAME = "navi";
     private String mSDCardPath = null;
 
     private NaviCallback mCallback;
@@ -52,7 +53,7 @@ public class NaviSdkWrapper {
     }
 
     public void initNavi(Activity activity) {
-        if (!initDirs()) {
+        if (!initDirs(activity)) {
             Log.e("init dirs failed!");
             return;
         }
@@ -230,8 +231,8 @@ public class NaviSdkWrapper {
         BNRouteGuideManager.getInstance().forceQuitNaviWithoutDialog();
     }
 
-    private boolean initDirs() {
-        mSDCardPath = NaviUtils.getSdcardDir();
+    private boolean initDirs(Activity activity) {
+        mSDCardPath = CommonUtils.getExternalCacheDir(activity).getAbsolutePath();
         if (mSDCardPath == null) {
             return false;
         }

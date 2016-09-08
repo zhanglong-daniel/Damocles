@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ffcccccc"
+        tools:context=".sample.TTSActivity">
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/tts_toolbar"
+            android:layout_width="match_parent"
+            android:background="@color/colorToolbar"
+            android:layout_height="wrap_content"
+            app:title="TTS"/>
+
+    <EditText
+            android:id="@+id/tts_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="6dp"
+            android:padding="10dp"
+            android:gravity="top|left"
+            android:textColor="#ff000000"
+            android:textSize="16sp"
+            android:hint="请输入要转换的文字"
+            android:textColorHint="#ff888888"
+            android:background="@mipmap/editbox_background_normal"/>
+
+    <Button
+            android:id="@+id/tts_btn"
+            style="@style/Button.Main"
+            android:text="开始合成"/>
+</LinearLayout>

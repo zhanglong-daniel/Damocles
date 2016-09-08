@@ -9,7 +9,7 @@ import com.damocles.common.log.Log;
  */
 class NaviInitListenerImpl implements BaiduNaviManager.NaviInitListener {
 
-    private final static String LOG_TAG = NaviUtils.LOG_TAG;
+    private final static String LOG_TAG =  "navi";
 
     public NaviInitListenerImpl() {
     }

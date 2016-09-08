@@ -28,7 +28,7 @@ public final class Log {
     }
 
     public static int v(String msg) {
-        return println(android.util.Log.VERBOSE, LOG_TAG, msg, 2);
+        return println(android.util.Log.VERBOSE, "", msg, 2);
     }
 
     public static int v(String tag, String msg) {
@@ -41,7 +41,7 @@ public final class Log {
     }
 
     public static int d(String msg) {
-        return println(android.util.Log.DEBUG, LOG_TAG, msg, 2);
+        return println(android.util.Log.DEBUG, "", msg, 2);
     }
 
     public static int d(String tag, String msg) {
@@ -53,7 +53,7 @@ public final class Log {
     }
 
     public static int i(String msg) {
-        return println(android.util.Log.INFO, LOG_TAG, msg, 2);
+        return println(android.util.Log.INFO, "", msg, 2);
     }
 
     public static int i(String tag, String msg) {
@@ -65,7 +65,7 @@ public final class Log {
     }
 
     public static int w(String msg) {
-        return println(android.util.Log.WARN, LOG_TAG, msg, 2);
+        return println(android.util.Log.WARN, "", msg, 2);
     }
 
     public static int w(String tag, String msg) {
@@ -77,7 +77,7 @@ public final class Log {
     }
 
     public static int e(String msg) {
-        return println(android.util.Log.ERROR, LOG_TAG, msg, 2);
+        return println(android.util.Log.ERROR, "", msg, 2);
     }
 
     public static int e(String tag, String msg) {
@@ -96,7 +96,7 @@ public final class Log {
         if (!LOG_ENABLE || priority < ENABLE_PRIORITY) {
             return -1;
         }
-        tag = TextUtils.equals(LOG_TAG, tag) ? tag : LOG_TAG + "_" + tag;
+        tag = TextUtils.isEmpty(tag) ? LOG_TAG : (LOG_TAG + "_" + tag);
         StackTraceElement stackTrace = (new Throwable()).getStackTrace()[stackLevel];
         String fileName = stackTrace.getFileName();
         String methodName = stackTrace.getMethodName();

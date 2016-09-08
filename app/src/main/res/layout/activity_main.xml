@@ -29,6 +29,15 @@
                     android:layout_height="wrap_content"
                     android:text="LinearLayout size"
                     android:layout_margin="5dp"/>
+
+            <Button
+                    android:onClick="onTTSClick"
+                    style="@style/Button.Main"
+                    android:text="TTS"/>
+            <Button
+                    android:onClick="onAmapClick"
+                    style="@style/Button.Main"
+                    android:text="高德地图车机版发起导航"/>
             <Button
                     android:onClick="onNaviClick"
                     style="@style/Button.Main"

@@ -9,7 +9,7 @@ import com.damocles.common.log.Log;
  */
 class RoutePlanListenerImpl implements BaiduNaviManager.RoutePlanListener {
 
-    private final static String LOG_TAG = NaviUtils.LOG_TAG;
+    private final static String LOG_TAG =  "navi";
 
     private BNRoutePlanNode mBNRoutePlanNode = null;
     private NaviCallback mCallback;

@@ -54,6 +54,8 @@
         <activity android:name="com.damocles.sample.NightModeActivity"
                   android:configChanges="uiMode"/>
 
+        <activity android:name="com.damocles.sample.TTSActivity"/>
+
         <service android:name="com.damocles.sample.service.MyService"/>
 
     </application>

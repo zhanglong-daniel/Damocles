@@ -21,6 +21,7 @@ import com.damocles.sample.NightModeActivity;
 import com.damocles.sample.PreferenceActivitySample;
 import com.damocles.sample.RecyclerViewActivity;
 import com.damocles.sample.SwitcherActivity;
+import com.damocles.sample.TTSActivity;
 import com.damocles.sample.ToastActivity;
 import com.damocles.sample.ViewGroupAnimationActivity;
 import com.damocles.sample.util.Utils;
@@ -28,6 +29,7 @@ import com.damocles.sample.util.Utils;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -162,16 +164,29 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
     }
 
+    public void onTTSClick(View view) {
+        startActivity(new Intent(this, TTSActivity.class));
+    }
+
     public void onNaviClick(View view) {
         if (mNaviSdk.isInited()) {
             mNaviSdk.routeplanToNavi(this, BNRoutePlanNode.CoordinateType.GCJ02);
         }
     }
 
+    public void onAmapClick(View view) {
+        Intent intent = new Intent();
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        Uri uri = Uri.parse("androidauto://navi?sourceApplication=微信助手&poiname=fangheng&lat=22.54229&lon=113"
+                + ".98043&dev=0&style=0");
+        intent.setData(uri);
+        startActivity(intent);
+    }
+
     public void onHomeClick(View view) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
         startActivity(intent);
     }
 

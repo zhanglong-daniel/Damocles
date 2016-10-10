@@ -1,13 +1,13 @@
 package com.damocles.navi;
 
 import com.baidu.navisdk.adapter.BNRouteGuideManager;
-import com.baidu.navisdk.adapter.BNRoutePlanNode;
 import com.damocles.common.log.Log;
+import com.damocles.navi.callback.NaviCallback;
 
 /**
  * Created by zhanglong02 on 16/8/24.
  */
-public class NavigationListenerImpl implements BNRouteGuideManager.OnNavigationListener {
+ class NavigationListenerImpl implements BNRouteGuideManager.OnNavigationListener {
 
     private final static String LOG_TAG = "navi";
 

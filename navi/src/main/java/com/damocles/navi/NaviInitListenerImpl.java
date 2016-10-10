@@ -3,15 +3,19 @@ package com.damocles.navi;
 import com.baidu.navisdk.adapter.BNaviSettingManager;
 import com.baidu.navisdk.adapter.BaiduNaviManager;
 import com.damocles.common.log.Log;
+import com.damocles.navi.callback.NaviInitCallback;
 
 /**
  * Created by zhanglong02 on 16/8/24.
  */
 class NaviInitListenerImpl implements BaiduNaviManager.NaviInitListener {
 
-    private final static String LOG_TAG =  "navi";
+    private final static String LOG_TAG = "navi";
 
-    public NaviInitListenerImpl() {
+    private NaviInitCallback mNaviInitCallback;
+
+    public NaviInitListenerImpl(NaviInitCallback callback) {
+        mNaviInitCallback = callback;
     }
 
     @Override
@@ -23,20 +27,26 @@ class NaviInitListenerImpl implements BaiduNaviManager.NaviInitListener {
     public void initSuccess() {
         Log.i(LOG_TAG, "百度导航引擎初始化成功");
         initSetting();
+        if (mNaviInitCallback != null) {
+            mNaviInitCallback.onSuccess();
+        }
     }
 
     @Override
     public void initFailed() {
         Log.e(LOG_TAG, "百度导航引擎初始化失败");
+        if (mNaviInitCallback != null) {
+            mNaviInitCallback.onFailed();
+        }
     }
 
     @Override
     public void onAuthResult(int status, String msg) {
         String authinfo;
         if (0 == status) {
-            authinfo = "key校验成功!";
+            authinfo = "百度导航 key校验成功!";
         } else {
-            authinfo = "key校验失败, " + msg;
+            authinfo = "百度导航 key校验失败, " + msg;
         }
         Log.e(LOG_TAG, authinfo);
     }

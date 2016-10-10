@@ -20,7 +20,7 @@
                 android:id="@+id/listview_section_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@android:color/darker_gray"
+                android:divider="@drawable/divider_bg"
                 android:dividerHeight="1dp"/>
         <include layout="@layout/activity_listview_section_header"/>
     </FrameLayout>

@@ -1,10 +1,9 @@
 package com.damocles.sample;
 
+import com.damocles.DamoclesApplication;
 import com.damocles.R;
-import com.damocles.android.base.DamoclesApplication;
 import com.damocles.sample.util.Utils;
 
-import android.app.ActivityManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;

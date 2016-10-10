@@ -8,11 +8,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AnimationActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private View view;
+    private TextView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class AnimationActivity extends AppCompatActivity implements View.OnClick
 
     private void initViews() {
         findViewById(R.id.animation_btn_start).setOnClickListener(this);
-        view = findViewById(R.id.animation_view);
+        view = (TextView) findViewById(R.id.animation_view);
         view.setOnClickListener(this);
         view.setPivotX(0.0f);
     }
@@ -46,12 +47,13 @@ public class AnimationActivity extends AppCompatActivity implements View.OnClick
     boolean flag = false;
 
     private void startAnimation() {
+        view.setVisibility(View.VISIBLE);
         if (flag) {
 
-            ObjectAnimator.ofFloat(view, "scaleX", 56.0f / 256.0f, 1.0f).setDuration(1000).start();
+            ObjectAnimator.ofFloat(view, "scaleY", 0.0f, 1.0f).setDuration(1000).start();
         } else {
 
-            ObjectAnimator.ofFloat(view, "scaleX", 1.0f, 56.0f / 256.0f).setDuration(1000).start();
+            ObjectAnimator.ofFloat(view, "scaleY", 1.0f, 0.0f).setDuration(1000).start();
         }
         flag = !flag;
     }

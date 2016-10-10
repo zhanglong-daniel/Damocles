@@ -13,6 +13,10 @@
     <style name="AppTheme" parent="AppTheme.Base">
     </style>
 
+    <style name="AppTheme.NoFullScreen">
+        <item name="windowNoTitle">false</item>
+    </style>
+
     <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.Light.PopupMenu.Overflow">
         <item name="overlapAnchor">false</item>
         <item name="android:popupBackground">#7fa87f</item>

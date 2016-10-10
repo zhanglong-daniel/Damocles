@@ -3,18 +3,19 @@ package com.damocles.navi;
 import com.baidu.navisdk.adapter.BNRoutePlanNode;
 import com.baidu.navisdk.adapter.BaiduNaviManager;
 import com.damocles.common.log.Log;
+import com.damocles.navi.callback.RoutePlanCallback;
 
 /**
  * Created by zhanglong02 on 16/8/24.
  */
 class RoutePlanListenerImpl implements BaiduNaviManager.RoutePlanListener {
 
-    private final static String LOG_TAG =  "navi";
+    private final static String LOG_TAG = "navi";
 
     private BNRoutePlanNode mBNRoutePlanNode = null;
-    private NaviCallback mCallback;
+    private RoutePlanCallback mCallback;
 
-    public RoutePlanListenerImpl(BNRoutePlanNode node, NaviCallback callback) {
+    public RoutePlanListenerImpl(BNRoutePlanNode node, RoutePlanCallback callback) {
         mBNRoutePlanNode = node;
         mCallback = callback;
     }

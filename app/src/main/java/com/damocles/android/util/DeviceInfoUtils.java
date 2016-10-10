@@ -2,7 +2,7 @@ package com.damocles.android.util;
 
 import java.lang.reflect.Field;
 
-import com.damocles.android.base.DamoclesApplication;
+import com.damocles.DamoclesApplication;
 
 import android.app.Activity;
 import android.content.Context;

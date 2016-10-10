@@ -88,6 +88,10 @@ public final class Log {
         return println(android.util.Log.ERROR, tag, msg, tr);
     }
 
+    public static int printStackTrace(Throwable tr) {
+        return println(android.util.Log.ERROR, "", getStackTraceString(tr), 2);
+    }
+
     private static int println(int priority, String tag, String msg, Throwable tr) {
         return println(priority, tag, msg + '\n' + getStackTraceString(tr), 3);
     }

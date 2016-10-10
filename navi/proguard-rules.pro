@@ -15,3 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# Baidu LBS
+-keep class com.baidu.a.a.a.** { *; }
+-keep class com.baidu.lbsaapi.auth.** { *; }
+-keep class com.baidu.location.** { *; }
+-keep class com.baidu.navisdk.adapter.** { *; }

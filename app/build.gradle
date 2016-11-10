@@ -4,17 +4,25 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
+    /**
+     * 默认配置
+     * 是ProductFlavor类型。它共享给其他ProductFlavor使用
+     */
     defaultConfig {
         applicationId "com.damocles"
         minSdkVersion 16
+        // targetSdk设置为23，且设备系统高于6.0时，权限动态申请机制失效
+        // 解决方案：targetSdk小于23或者手动申请权限
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
     }
 
-
-
+    /**
+     * 签名配置
+     * SigningConfig类型
+     */
     signingConfigs {
         release {
             storeFile file("keystore/debug.keystore")
@@ -31,6 +39,9 @@ android {
         }
     }
 
+    /**
+     * BuildType类型
+     */
     buildTypes {
 
         release {
@@ -42,12 +53,54 @@ android {
 
         debug {
             signingConfig signingConfigs.debug
-            zipAlignEnabled true
+            zipAlignEnabled false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
+    aaptOptions {
+        noCompress 'foo', 'bar'
+        ignoreAssetsPattern "!.svn:!.git:!.ds_store:!*.scc:.*:<dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        encoding "utf-8"
+        //  java版本，默认值是1.6
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+
+    // dex选项
+    dexOptions {
+        /**
+         * Whether to enable the incremental mode for dx. This has many limitations and may not
+         * work. Use carefully.
+         */
+        incremental false
+        /**
+         * Sets the -JXmx* value when calling dx. Format should follow the 1024M pattern.
+         */
+        javaMaxHeapSize "4096M"
+        preDexLibraries = false
+        jumboMode = false
+    }
+
+    /**
+     * 源文件目录设置
+     * AndroidSourceSet类型。
+     */
     sourceSets {
         main {
             manifest.srcFile 'src/main/AndroidManifest.xml'
@@ -58,12 +111,6 @@ android {
         }
     }
 
-
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-    }
 }
 
 dependencies {
@@ -71,4 +118,5 @@ dependencies {
     compile project(':common')
     compile project(':navi')
     compile project(':tts')
+    compile project(':voicerecognition')
 }

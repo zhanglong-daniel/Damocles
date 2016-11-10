@@ -12,6 +12,7 @@ buildscript {
     }
 }
 
+//jcenter 为新的中央远程仓库，兼容maven中心仓库，而且性能更优
 allprojects {
     repositories {
         jcenter()

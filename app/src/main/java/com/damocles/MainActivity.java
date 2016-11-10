@@ -30,6 +30,7 @@ import com.damocles.sample.ToastActivity;
 import com.damocles.sample.ViewGroupAnimationActivity;
 import com.damocles.sample.util.Utils;
 import com.damocles.tts.TTSPlayer;
+import com.damocles.voicerecognition.WakeUpActivity;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -52,8 +53,11 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mLinearLayout;
     private TextView mTextView;
 
+    private long startTime = 0L;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        startTime = System.currentTimeMillis();
         Log.i("onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         Log.i("onResume()");
         super.onResume();
+        Log.e("used time :" + (System.currentTimeMillis() - startTime));
     }
 
     @Override
@@ -143,6 +148,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 1000);
 
+    }
+
+    public void onVoiceRecognitionClick(View view) {
+        startActivity(new Intent(this, WakeUpActivity.class));
     }
 
     public void onPendulumClick(View view) {

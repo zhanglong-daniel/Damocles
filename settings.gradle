@@ -1,1 +1,1 @@
-include ':app', ':common', ':navi', ':tts'
+include ':app', ':common', ':navi', ':tts', ':voicerecognition'

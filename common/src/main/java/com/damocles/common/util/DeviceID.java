@@ -19,27 +19,26 @@ public final class DeviceID {
         // IMEI
         String deviceID = getIMEI(context);
         if (deviceID != null && deviceID.length() == 15) {
-            return generateID(context, deviceID);
+            return generateID(deviceID);
         }
         // MAC Address
         deviceID = getMacAddress(context).replaceAll(":", "");
         if (deviceID != null && deviceID.length() > 0) {
-            return generateID(context, deviceID);
+            return generateID(deviceID);
         }
         // ANDROID_ID
         deviceID = getAndroidId(context);
         if (deviceID != null && deviceID.length() == 16) {
-            return generateID(context, deviceID);
+            return generateID(deviceID);
         }
         deviceID = UUID.randomUUID().toString().replaceAll("-", "");
-        return generateID(context, deviceID);
+        return generateID(deviceID);
     }
 
-    private static String generateID(Context context, String id) {
-        String pkgName = context.getPackageName();
-        String deviceID = pkgName + ":" + id;
+    private static String generateID(String id) {
+        String deviceID;
         try {
-            deviceID = MD5Util.md5(deviceID.getBytes());
+            deviceID = MD5Util.md5(id.getBytes());
         } catch (Exception e) {
             Log.printStackTrace(e);
             deviceID = "";

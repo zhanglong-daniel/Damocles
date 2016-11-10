@@ -1,12 +1,13 @@
 package com.damocles.sample;
 
 import com.damocles.R;
+import com.damocles.common.view.WaveformView;
 import com.damocles.sample.util.Utils;
 
 import android.animation.ObjectAnimator;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 public class AnimationActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView view;
+
+    private WaveformView waveformView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class AnimationActivity extends AppCompatActivity implements View.OnClick
         view = (TextView) findViewById(R.id.animation_view);
         view.setOnClickListener(this);
         view.setPivotX(0.0f);
+        waveformView = (WaveformView) findViewById(R.id.animation_waveform);
+        waveformView.setBackgroundColor(Color.BLACK);
     }
 
     boolean flag = false;

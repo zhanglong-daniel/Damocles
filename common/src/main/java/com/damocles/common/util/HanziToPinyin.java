@@ -34,10 +34,8 @@ import android.util.Log;
  * Currently this file is aligned to zh.txt in ICU 4.6
  */
 public final class HanziToPinyin {
-    private static final String TAG = "HanziToPinyin";
 
-    // Turn on this flag when we want to check internal data structure.
-    private static final boolean DEBUG = false;
+    private static final String TAG = "HanziToPinyin";
 
     /**
      * Unihans array.
@@ -387,29 +385,6 @@ public final class HanziToPinyin {
     }
 
     public static HanziToPinyin getInstance() {
-        // 注释了系统源码
-        //        synchronized (HanziToPinyin.class) {
-        //            if (sInstance != null) {
-        //                return sInstance;
-        //            }
-        //            // Check if zh_CN collation data is available
-        //            final Locale locale[] = Collator.getAvailableLocales();
-        //            for (int i = 0; i < locale.length; i++) {
-        //                if (locale[i].equals(Locale.CHINA)) {
-        //                    // Do self validation just once.
-        //                    if (DEBUG) {
-        //                        LogUtil.d(TAG, "Self validation. Result: " + doSelfValidation());
-        //                    }
-        //                    sInstance = new HanziToPinyin(true);
-        //                    return sInstance;
-        //                }
-        //            }
-        //            Log.w(TAG, "There is no Chinese collator, HanziToPinyin is disabled");
-        //            sInstance = new HanziToPinyin(false);
-        //            return sInstance;
-        //        }
-
-        // 直接改为支持中文字符集，为了解决通讯录按字母分类的问题
         synchronized(HanziToPinyin.class) {
             if (sInstance == null) {
                 sInstance = new HanziToPinyin(true);

@@ -12,11 +12,19 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            // 自定义BuildConfig参数
+            buildConfigField "boolean", "LOG_ENABLE", "false"
+            buildConfigField "String", "LOG_TAG", "\"damocles\""
+            zipAlignEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled true
+            // 自定义BuildConfig参数
+            buildConfigField "boolean", "LOG_ENABLE", "true"
+            buildConfigField "String", "LOG_TAG", "\"damocles\""
+            zipAlignEnabled false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

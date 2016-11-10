@@ -4,8 +4,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.UnknownHostException;
 
-import com.damocles.common.constant.Constants;
+import com.damocles.common.BuildConfig;
 
+import android.os.Build;
 import android.text.TextUtils;
 
 /**
@@ -13,18 +14,14 @@ import android.text.TextUtils;
  */
 public final class Log {
 
-    private static String LOG_TAG = Constants.LOG_TAG;
+    private static final String LOG_TAG = BuildConfig.LOG_TAG;
 
-    private static final boolean LOG_ENABLE = true;
+    private static final boolean LOG_ENABLE = BuildConfig.LOG_ENABLE;
 
-    private static final int ENABLE_PRIORITY = android.util.Log.VERBOSE;
+    private static int ENABLE_PRIORITY = android.util.Log.VERBOSE;
 
-    private Log() {
-        setLogTag(Constants.LOG_TAG);
-    }
-
-    public static void setLogTag(String tag) {
-        LOG_TAG = tag;
+    public static void setEnablePriority(int priority) {
+        ENABLE_PRIORITY = priority;
     }
 
     public static int v(String msg) {

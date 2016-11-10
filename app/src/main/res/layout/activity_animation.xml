@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".sample.ToastActivity">
+        tools:context=".sample.ToastActivity"
+        android:id="@+id/animation_layout_root">
     <android.support.v7.widget.Toolbar
             android:id="@+id/animation_toolbar"
             android:layout_width="match_parent"
@@ -30,5 +31,9 @@
             android:gravity="center"
             android:textSize="20sp"
             android:background="#ff0000"/>
+    <com.damocles.common.view.WaveformView
+            android:id="@+id/animation_waveform"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
 
 </LinearLayout>

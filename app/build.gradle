@@ -116,7 +116,4 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':common')
-    compile project(':navi')
-    compile project(':tts')
-    compile project(':voicerecognition')
 }

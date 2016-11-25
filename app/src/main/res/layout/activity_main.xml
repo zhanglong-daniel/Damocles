@@ -30,27 +30,15 @@
                     android:text="LinearLayout size"
                     android:layout_margin="5dp"/>
 
-            <Button
-                    android:onClick="onVoiceRecognitionClick"
-                    style="@style/Button.Main"
-                    android:text="Voice Recognition"/>
 
             <Button
                     android:onClick="onPendulumClick"
                     style="@style/Button.Main"
                     android:text="pendulum"/>
             <Button
-                    android:onClick="onTTSClick"
-                    style="@style/Button.Main"
-                    android:text="TTS"/>
-            <Button
                     android:onClick="onAmapClick"
                     style="@style/Button.Main"
                     android:text="高德地图车机版导航去世界之窗"/>
-            <Button
-                    android:onClick="onNaviClick"
-                    style="@style/Button.Main"
-                    android:text="百度导航去世界之窗"/>
             <Button
                     android:onClick="onHomeClick"
                     style="@style/Button.Main"

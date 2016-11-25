@@ -50,10 +50,6 @@
         <activity android:name="com.damocles.sample.VehicleActivity"/>
         <activity android:name="com.damocles.sample.AnimationActivity"/>
         <activity android:name="com.damocles.sample.RecyclerViewActivity"/>
-        <activity android:name="com.damocles.sample.BNDemoGuideActivity"
-                  android:screenOrientation="landscape"/>
-        <activity android:name="com.damocles.sample.NaviActivity"
-                  android:screenOrientation="landscape"/>
         <activity android:name="com.damocles.sample.NightModeActivity"
                   android:configChanges="uiMode"/>
 

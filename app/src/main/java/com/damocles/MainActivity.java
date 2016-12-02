@@ -1,7 +1,11 @@
 package com.damocles;
 
+import java.util.Map;
+
 import com.damocles.android.util.DeviceInfoUtils;
 import com.damocles.common.log.Log;
+import com.damocles.common.network.http.HttpCallback;
+import com.damocles.common.network.http.HttpManager;
 import com.damocles.common.util.CommonUtils;
 import com.damocles.common.util.DeviceID;
 import com.damocles.sample.AnimationActivity;

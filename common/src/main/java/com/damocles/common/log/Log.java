@@ -4,9 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.UnknownHostException;
 
-import com.damocles.common.BuildConfig;
-
-import android.os.Build;
 import android.text.TextUtils;
 
 /**
@@ -14,14 +11,32 @@ import android.text.TextUtils;
  */
 public final class Log {
 
-    private static final String LOG_TAG = BuildConfig.LOG_TAG;
+    enum Priority {
+        VERBOSE, DEBUG, INFO, WARN, ERROR, ASSERT
+    }
 
-    private static final boolean LOG_ENABLE = BuildConfig.LOG_ENABLE;
+    private static String LOG_TAG = "damocles";
 
-    private static int ENABLE_PRIORITY = android.util.Log.VERBOSE;
+    private static boolean LOG_ENABLE = true;
 
-    public static void setEnablePriority(int priority) {
-        ENABLE_PRIORITY = priority;
+    private static Priority ENABLE_PRIORITY = Priority.VERBOSE;
+
+    public static void setEnablePriority(Priority priority) {
+        if (priority != null) {
+            ENABLE_PRIORITY = priority;
+        }
+    }
+
+    public static void setLogTag(String tag) {
+        if (TextUtils.isEmpty(tag)) {
+            throw new IllegalArgumentException("the log tag is null");
+        } else {
+            LOG_TAG = tag;
+        }
+    }
+
+    public static void setLogEnable(boolean logEnable) {
+        LOG_ENABLE = logEnable;
     }
 
     public static int v(String msg) {
@@ -94,7 +109,7 @@ public final class Log {
     }
 
     private static int println(int priority, String tag, String msg, int stackLevel) {
-        if (!LOG_ENABLE || priority < ENABLE_PRIORITY) {
+        if (!LOG_ENABLE || priority < ENABLE_PRIORITY.ordinal() + 2) {
             return -1;
         }
         tag = TextUtils.isEmpty(tag) ? LOG_TAG : (LOG_TAG + "_" + tag);

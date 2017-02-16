@@ -1,13 +1,12 @@
 package com.damocles;
 
-import java.util.Map;
-
+import com.damocles.android.notification.NotificationFactory;
+import com.damocles.android.notification.RemoteNotificationParams;
 import com.damocles.android.util.DeviceInfoUtils;
 import com.damocles.common.log.Log;
-import com.damocles.common.network.http.HttpCallback;
-import com.damocles.common.network.http.HttpManager;
 import com.damocles.common.util.CommonUtils;
 import com.damocles.common.util.DeviceID;
+import com.damocles.common.util.DoubleClickExit;
 import com.damocles.sample.AnimationActivity;
 import com.damocles.sample.BlueToothActivity;
 import com.damocles.sample.BroadcastActivity;
@@ -27,20 +26,23 @@ import com.damocles.sample.ViewGroupAnimationActivity;
 import com.damocles.sample.util.Utils;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DoubleClickExit.Callback {
 
     private Toolbar mToolbar;
     private LinearLayout mLinearLayout;
@@ -48,10 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
     private long startTime = 0L;
 
+    private DoubleClickExit mDoubleClickExit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         startTime = System.currentTimeMillis();
-        Log.i("onCreate()");
+        Log.i("fuck", "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mToolbar = Utils.initToolbar(this, R.id.main_toolbar);
@@ -63,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        mTextView = (TextView) findViewById(R.id.main_txt);
         mLinearLayout = (LinearLayout) findViewById(R.id.main_linearlayout);
+        mTextView = (TextView) findViewById(R.id.main_txt);
+        acquireWakeLock();
     }
 
     @Override
@@ -81,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        Log.i("onResume()");
+        Log.i("fuck", "onResume()");
         super.onResume();
         Log.e("used time :" + (System.currentTimeMillis() - startTime));
     }
@@ -102,13 +107,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         Log.i("onDestroy()");
         super.onDestroy();
+        releaseWakeLock();
+
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        Log.i("onWindowFocusChanged()");
+        Log.i("fuck", "onWindowFocusChanged()");
         super.onWindowFocusChanged(hasFocus);
-        Log.e("statusBarHeight = " + DeviceInfoUtils.getStatusBarHeightOnWindowFocusChanged(this));
+        Log.e("fuck", "statusBarHeight = " + DeviceInfoUtils.getStatusBarHeightOnWindowFocusChanged(this));
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("DeviceID = " + DeviceID.getID(this)).append("\n");
         stringBuffer.append("分辨率：").append(DeviceInfoUtils.getScreenWidth());
@@ -128,6 +135,55 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         Log.e(DeviceInfoUtils.getScreenWidth() + " ; " + DeviceInfoUtils.getScreenHeight());
         super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDoubleClickExit == null) {
+            mDoubleClickExit = new DoubleClickExit(this);
+            mDoubleClickExit.setClickInterval(1000);
+            mDoubleClickExit.setClickTips("再按一次退出Damocles");
+        }
+        mDoubleClickExit.execute(this);
+    }
+
+    @Override
+    public void onExit() {
+        Log.e("fuck");
+        this.finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    PowerManager.WakeLock wakeLock;
+
+    private void acquireWakeLock() {
+        if (wakeLock == null) {
+            Log.e("fuck", "Acquiring wake lock");
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, this.getClass().getCanonicalName());
+            wakeLock.acquire();
+        }
+
+    }
+
+    private void releaseWakeLock() {
+        if (wakeLock != null && wakeLock.isHeld()) {
+            Log.e("fuck", "Release wake lock");
+            wakeLock.release();
+            wakeLock = null;
+        }
+
+    }
+
+    public void onCustomNotificationClick(View view) {
+        RemoteNotificationParams params = new RemoteNotificationParams(5);
+        params.ticker = "ticker_custom";
+        params.smallIcon = R.mipmap.ic_launcher;
+        params.ongoing = true;
+        params.vibrateEnable = true;
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_remoteviews_custom);
+        params.remoteViews = remoteViews;
+        NotificationFactory.showRemoteViews(this, params);
     }
 
     public void onPendulumClick(View view) {

@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
  */
-package com.damocles.common.view;
+package com.damocles.common.widget;
 
 /**
  * 波形动画

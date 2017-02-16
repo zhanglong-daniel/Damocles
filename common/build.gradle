@@ -13,16 +13,14 @@ android {
     buildTypes {
         release {
             // 自定义BuildConfig参数
-            buildConfigField "boolean", "LOG_ENABLE", "true"
-            buildConfigField "String", "LOG_TAG", "\"damocles\""
+            buildConfigField "String", "SDK_VERSION", "\"1.0\""
             zipAlignEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             // 自定义BuildConfig参数
-            buildConfigField "boolean", "LOG_ENABLE", "true"
-            buildConfigField "String", "LOG_TAG", "\"damocles\""
+            buildConfigField "String", "SDK_VERSION", "\"1.0\""
             zipAlignEnabled false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -37,10 +35,6 @@ android {
 
     sourceSets {
         main {
-            manifest.srcFile 'src/main/AndroidManifest.xml'
-            java.srcDirs = ['src/main/java']
-            res.srcDirs = ['src/main/res']
-            assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
         }
     }
@@ -48,9 +42,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.android.support:support-v4:23.2.0'
-    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.android.support:design:23.2.1'
     // OkHttp3
     compile('com.squareup.okhttp3:okhttp:3.4.1')
     // fresco

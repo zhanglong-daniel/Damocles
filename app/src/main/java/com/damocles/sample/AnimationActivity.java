@@ -1,7 +1,7 @@
 package com.damocles.sample;
 
 import com.damocles.R;
-import com.damocles.common.view.WaveformView;
+import com.damocles.common.widget.WaveformView;
 import com.damocles.sample.util.Utils;
 
 import android.animation.ObjectAnimator;

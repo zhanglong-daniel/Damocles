@@ -31,7 +31,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:background="#ff0000"/>
-    <com.damocles.common.view.WaveformView
+    <com.damocles.common.widget.WaveformView
             android:id="@+id/animation_waveform"
             android:layout_width="match_parent"
             android:layout_height="100dp"/>

@@ -30,6 +30,10 @@
                     android:text="LinearLayout size"
                     android:layout_margin="5dp"/>
 
+            <Button android:onClick="onCustomNotificationClick"
+                    style="@style/Button.Main"
+                    android:text="show custom notify"/>
+
 
             <Button
                     android:onClick="onPendulumClick"

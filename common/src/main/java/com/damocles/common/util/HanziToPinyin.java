@@ -1,17 +1,5 @@
 /*
- * Copyright (C) 2011 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright (C) 2016 Baidu, Inc. All Rights Reserved.
  */
 
 package com.damocles.common.util;
@@ -19,9 +7,6 @@ package com.damocles.common.util;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import android.text.TextUtils;
-import android.util.Log;
 
 /**
  * An object to convert Chinese character to its corresponding pinyin string. For characters with
@@ -33,9 +18,11 @@ import android.util.Log;
  * <p/>
  * Currently this file is aligned to zh.txt in ICU 4.6
  */
-public final class HanziToPinyin {
-
+public class HanziToPinyin {
     private static final String TAG = "HanziToPinyin";
+
+    // Turn on this flag when we want to check internal data structure.
+    private static final boolean DEBUG = false;
 
     /**
      * Unihans array.
@@ -385,6 +372,29 @@ public final class HanziToPinyin {
     }
 
     public static HanziToPinyin getInstance() {
+        // 注释了系统源码
+        //        synchronized (HanziToPinyin.class) {
+        //            if (sInstance != null) {
+        //                return sInstance;
+        //            }
+        //            // Check if zh_CN collation data is available
+        //            final Locale locale[] = Collator.getAvailableLocales();
+        //            for (int i = 0; i < locale.length; i++) {
+        //                if (locale[i].equals(Locale.CHINA)) {
+        //                    // Do self validation just once.
+        //                    if (DEBUG) {
+        //                        LogUtil.d(TAG, "Self validation. Result: " + doSelfValidation());
+        //                    }
+        //                    sInstance = new HanziToPinyin(true);
+        //                    return sInstance;
+        //                }
+        //            }
+        //            Log.w(TAG, "There is no Chinese collator, HanziToPinyin is disabled");
+        //            sInstance = new HanziToPinyin(false);
+        //            return sInstance;
+        //        }
+
+        // 直接改为支持中文字符集，为了解决通讯录按字母分类的问题
         synchronized(HanziToPinyin.class) {
             if (sInstance == null) {
                 sInstance = new HanziToPinyin(true);
@@ -408,8 +418,8 @@ public final class HanziToPinyin {
             final String curString = Character.toString(c);
             int cmp = COLLATOR.compare(lastString, curString);
             if (cmp >= 0) {
-                Log.e(TAG, "Internal error in Unihan table. " + "The last string \"" + lastString
-                        + "\" is greater than current string \"" + curString + "\".");
+                //                Log.e(TAG, "Internal error in Unihan table. " + "The last string \"" + lastString
+                //                        + "\" is greater than current string \"" + curString + "\".");
                 return false;
             }
             lastString = curString;
@@ -474,7 +484,7 @@ public final class HanziToPinyin {
             pinyin.append((char) PINYINS[offset][j]);
         }
         token.target = pinyin.toString();
-        if (TextUtils.isEmpty(token.target)) {
+        if (token.target == null || token.target.length() == 0) {
             token.type = Token.UNKNOWN;
             token.target = token.source;
         }
@@ -490,7 +500,7 @@ public final class HanziToPinyin {
         for (Token token : tokens) {
             buffer.append(token.target);
         }
-        return buffer.toString();
+        return buffer.toString().toLowerCase();
     }
 
     /**
@@ -500,7 +510,7 @@ public final class HanziToPinyin {
      */
     public ArrayList<Token> getTokens(final String input) {
         ArrayList<Token> tokens = new ArrayList<Token>();
-        if (!mHasChinaCollator || TextUtils.isEmpty(input)) {
+        if (!mHasChinaCollator || input == null || input.length() == 0) {
             // return empty tokens.
             return tokens;
         }

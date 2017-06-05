@@ -1,5 +1,6 @@
 package com.damocles.common.network.http;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -7,9 +8,9 @@ import java.util.Map;
  */
 public interface HttpCallback {
 
-    void onError(String error);
+    void onSuccess(String url, int statusCode, String response);
 
-    void onSuccess(int statusCode, String response);
+    void onCookies(String url, List<String> cookies);
 
-    void onCookies(Map<String, String> cookies);
+    void onError(String url, String errMsg);
 }

@@ -1,15 +1,23 @@
 apply plugin: 'com.android.library'
+apply from: "${project.rootDir}/config.gradle"
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+
+    compileSdkVersion project.ext.android.compileSdkVersion
+    buildToolsVersion project.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion project.ext.android.defaultConfig.minSdkVersion
+        targetSdkVersion project.ext.android.defaultConfig.targetSdkVersion
+        versionCode project.ext.android.defaultConfig.versionCode
+        versionName project.ext.android.defaultConfig.versionName
     }
+
+    lintOptions {
+        checkReleaseBuilds project.ext.android.lintOptions.checkReleaseBuilds
+        abortOnError project.ext.android.lintOptions.abortOnError
+    }
+
     buildTypes {
         release {
             // 自定义BuildConfig参数
@@ -27,10 +35,6 @@ android {
         }
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
 
 
     sourceSets {
@@ -42,11 +46,11 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:support-v4:23.2.1'
-    compile 'com.android.support:design:23.2.1'
-    // OkHttp3
-    compile('com.squareup.okhttp3:okhttp:3.4.1')
+    compile project.ext.dependencies["appcompat-v7"]
+    compile project.ext.dependencies["support-v4"]
+    compile project.ext.dependencies["design"]
+    compile project.ext.dependencies["okhttp3"]
+
     // fresco
     compile "com.facebook.fresco:imagepipeline-okhttp3:0.12.0"
     compile('com.facebook.fresco:fresco:0.12.0') {

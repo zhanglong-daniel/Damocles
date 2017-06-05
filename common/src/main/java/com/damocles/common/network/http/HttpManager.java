@@ -1,6 +1,7 @@
 package com.damocles.common.network.http;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -10,11 +11,13 @@ import android.os.Handler;
 import android.os.Looper;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
+ * http请求管理类，需在主线程调用
  * Created by zhanglong02 on 16/12/2.
  */
 public final class HttpManager {
@@ -51,8 +54,8 @@ public final class HttpManager {
         return getInstance().mOkHttpClient;
     }
 
-    public static void cancelAll() {
-        Log.i(TAG, "cancel all http request");
+    public static void cancelAllRequests() {
+        Log.i(TAG, "cancel all requests");
         getInstance().mOkHttpClient.dispatcher().cancelAll();
     }
 
@@ -63,89 +66,87 @@ public final class HttpManager {
 
     // ******************************************
 
-    public static void get(String url, HttpCallback httpCallback) {
-        Log.i(TAG, "url=" + url);
-        Request request = HttpUtils.buildGetRequest(url);
-        getInstance()._execute(request, httpCallback);
+    public static void get(String url, HttpCallback callback) {
+        Request request = HttpManagerUtil.buildGetRequest(url);
+        getInstance().execute(request, callback);
     }
 
-    public static void post(String url, Map<String, String> postParams, HttpCallback httpCallback) {
-        Log.i(TAG, "url=" + url);
-        Request request = HttpUtils.buildPostRequest(url, postParams);
-        getInstance()._execute(request, httpCallback);
+    public static void post(String url, Map<String, String> params, HttpCallback callback) {
+        Request request = HttpManagerUtil.buildPostRequest(url, params);
+        getInstance().execute(request, callback);
     }
 
-    public static void post(String url, String postJson, HttpCallback httpCallback) {
-        Log.i(TAG, "url=" + url);
-        Request request = HttpUtils.buildPostRequest(url, postJson);
-        getInstance()._execute(request, httpCallback);
+    public static void post(String url, String postJson, HttpCallback callback) {
+        Request request = HttpManagerUtil.buildPostRequest(url, postJson);
+        getInstance().execute(request, callback);
     }
 
-    // ******************************************
-
-    private void _execute(Request request, final HttpCallback httpCallback) {
-
-        Callback callback = new Callback() {
-
-            @Override
-            public void onFailure(Call call, final IOException e) {
-                _handleErrorCallback(httpCallback, e.toString());
-            }
+    private void execute(Request request, final HttpCallback callback) {
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
 
             @Override
             public void onResponse(Call call, final Response response) {
+                String url = call.request().url().toString();
+                if (callback == null) {
+                    Log.e(TAG, "HttpCallback is null");
+                }
                 try {
+                    List<String> cookies = response.headers().values("Set-Cookie");
                     // cookies
-                    _handleCookieCallback(httpCallback, HttpUtils.getCookies(response));
+                    cookieCallback(callback, url, cookies);
                     // response
                     int statusCode = response.code();
-                    String body = response.body().string();
-                    _handleSuccessCallback(httpCallback, statusCode, body);
+                    if (response.isSuccessful()) {  // code >= 200 && code < 300
+                        String body = response.body().string();
+                        successCallback(callback, url, statusCode, body);
+                    } else {
+                        errorCallback(callback, url, "statusCode=" + statusCode);
+                    }
                 } catch (Exception e) {
-                    _handleErrorCallback(httpCallback, e.toString());
+                    errorCallback(callback, url, e.toString());
                 } finally {
                     response.close();
                 }
             }
-        };
 
-        mOkHttpClient.newCall(request).enqueue(callback);
+            @Override
+            public void onFailure(Call call, final IOException e) {
+                errorCallback(callback, call.request().url().toString(), e.toString());
+            }
+        });
     }
 
-    // ******************************************
-
-    private void _handleErrorCallback(final HttpCallback httpCallback, final String error) {
-        Log.e(TAG, "error=" + error);
+    private void successCallback(final HttpCallback callback, final String url, final int statusCode, final String
+            response) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                if (httpCallback != null) {
-                    httpCallback.onError(error);
+                if (callback != null) {
+                    callback.onSuccess(url, statusCode, response);
                 }
             }
         });
     }
 
-    private void _handleSuccessCallback(final HttpCallback httpCallback, final int statusCode, final String response) {
+    private void cookieCallback(final HttpCallback callback, final String url, final List<String> cookies) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                if (httpCallback != null) {
-                    httpCallback.onSuccess(statusCode, response);
+                if (callback != null) {
+                    callback.onCookies(url, cookies);
                 }
             }
         });
     }
 
-    private void _handleCookieCallback(final HttpCallback httpCallback, final Map<String, String> cookies) {
+    private void errorCallback(final HttpCallback callback, final String url, final String errMsg) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                if (httpCallback != null) {
-                    httpCallback.onCookies(cookies);
+                if (callback != null) {
+                    callback.onError(url, errMsg);
                 }
             }
         });
     }
-
 }

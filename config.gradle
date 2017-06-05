@@ -1,0 +1,85 @@
+/*
+ * Copyright (C) 2017 Baidu, Inc. All Rights Reserved.
+ */
+// import java.util.regex.Pattern
+ext {
+
+    android = [
+
+            compileSdkVersion: 23,
+            buildToolsVersion: "25.0.0",
+
+            defaultConfig    : [
+                    applicationId   : "com.damocles",
+                    versionCode     : 1,
+                    versionName     : "1.0",
+                    minSdkVersion   : 16,
+                    // targetSdk设置为23，且设备系统高于6.0时，权限动态申请机制失效；解决方案：targetSdk小于23或者手动申请权限
+                    targetSdkVersion: 22
+            ],
+
+            lintOptions      : [
+                    checkReleaseBuilds: false,
+                    abortOnError      : false
+            ]
+
+    ]
+
+    dependencies = [
+            "appcompat-v7": "com.android.support:appcompat-v7:25.0.0",
+            "support-v4"  : "com.android.support:support-v4:25.0.0",
+            "design"      : "com.android.support:design:25.0.0",
+            "okhttp3"     : "com.squareup.okhttp3:okhttp:3.4.1",
+    ]
+
+//    multiDexEnabled = true
+//
+//
+//
+//    javaVersion = 7
+//    javaMaxHeapSize = '2G'
+//
+//
+//
+//
+//    enableBuildNative = true
+//    enableAspectj = false
+//    installAfterBuild = false
+
+    // 开启instantRun
+//    instantRun = false
+    // 自定义 multiDex
+//    customMultiDex = true
+
+    // resguard
+//    enableResguard = true
+//
+//    sourceCompatibility = this.&getJavaVersion()
+//    targetCompatibility = this.&getJavaVersion()
+//    getParamManifest = this.&getParamManifest
+//    parseLocalPropertes = this.&parseLocalPropertes
+//    analysisDexMethod = this.&analysisDexMethod
+//    generateMainDexClass = this.&generateMainDexClass
+//    analysisPath = this.&analysisPath
+//    releaseTime = this.&releaseTime
+//
+//    buildToolsPath = "${project.rootDir}/build-tools/"
+//    multiDexRulesDir = "${projectDir}/multidex"
+}
+
+//def getJavaVersion() {
+//    switch (project.ext.javaVersion) {
+//        case "6":
+//            return JavaVersion.VERSION_1_6
+//        case "7":
+//            return JavaVersion.VERSION_1_7
+//        case "8":
+//            return JavaVersion.VERSION_1_8
+//        case "9":
+//            return JavaVersion.VERSION_1_9
+//        default:
+//            return JavaVersion.VERSION_1_6
+//    }
+//}
+
+

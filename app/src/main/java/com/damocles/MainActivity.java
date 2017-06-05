@@ -4,7 +4,6 @@ import com.damocles.android.notification.NotificationFactory;
 import com.damocles.android.notification.RemoteNotificationParams;
 import com.damocles.android.util.DeviceInfoUtils;
 import com.damocles.common.log.Log;
-import com.damocles.common.util.CommonUtils;
 import com.damocles.common.util.DeviceID;
 import com.damocles.common.util.DoubleClickExit;
 import com.damocles.sample.AnimationActivity;
@@ -25,11 +24,9 @@ import com.damocles.sample.ToastActivity;
 import com.damocles.sample.ViewGroupAnimationActivity;
 import com.damocles.sample.util.Utils;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
@@ -190,32 +187,8 @@ public class MainActivity extends AppCompatActivity implements DoubleClickExit.C
         startActivity(new Intent(this, PendulumActivity.class));
     }
 
-    public void onAmapClick(View view) {
-        if (!CommonUtils.isAppInstalled(this, "com.autonavi.amapauto")) {
-            Toast.makeText(MainActivity.this, "未安装高德地图车机版", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Intent intent = new Intent();
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        Uri uri = Uri.parse(
-                "androidauto://navi?sourceApplication=damocles&poiname=fangheng"
-                        + "&lat=22.535891&lon=113.974428&dev=0&style=0");
-        intent.setData(uri);
-        startActivity(intent);
-    }
-
     public void onHomeClick(View view) {
         moveTaskToBack(false);
-    }
-
-    public void onWechatClick(View view) {
-        if (CommonUtils.isAppInstalled(this, "com.baidu.wechathelper")) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setComponent(new ComponentName("com.baidu.wechathelper", "com.baidu.wechathelper.MainActivity"));
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "微信助手未安装", Toast.LENGTH_SHORT).show();
-        }
     }
 
     public void onNightModeClick(View view) {

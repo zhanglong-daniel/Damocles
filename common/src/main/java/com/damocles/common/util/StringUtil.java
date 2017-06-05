@@ -17,7 +17,7 @@ public final class StringUtil {
      * @return
      */
     public static String reverse(String str) {
-        return str.length() > 0 ? reverse(str.substring(1)) + str.charAt(0) : "";
+        return new StringBuffer(str).reverse().toString();
     }
 
     /**

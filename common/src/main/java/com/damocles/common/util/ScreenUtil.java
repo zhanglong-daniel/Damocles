@@ -7,7 +7,7 @@ import android.util.DisplayMetrics;
  * Created by zhanglong02 on 17/2/17.
  */
 
-public class DeviceUtil {
+public class ScreenUtil {
 
     private static int screenWidth = 0;
     private static int screenHeight = 0;
@@ -34,8 +34,8 @@ public class DeviceUtil {
         return density;
     }
 
-    public static float dp2px(Context context, float dp) {
-        return getDensity(context) * dp;
+    public static int dp2px(Context context, float dp) {
+        return (int) (getDensity(context) * dp);
     }
 
     private static DisplayMetrics getDisplayMetrics(Context context) {

@@ -1,22 +1,23 @@
 apply plugin: 'com.android.application'
+apply from: "${project.rootDir}/config.gradle"
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
 
-    /**
-     * 默认配置
-     * 是ProductFlavor类型。它共享给其他ProductFlavor使用
-     */
+    compileSdkVersion project.ext.android.compileSdkVersion
+    buildToolsVersion project.ext.android.buildToolsVersion
+
     defaultConfig {
-        applicationId "com.damocles"
-        minSdkVersion 16
-        // targetSdk设置为23，且设备系统高于6.0时，权限动态申请机制失效
-        // 解决方案：targetSdk小于23或者手动申请权限
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        applicationId project.ext.android.defaultConfig.applicationId
+        minSdkVersion project.ext.android.defaultConfig.minSdkVersion
+        targetSdkVersion project.ext.android.defaultConfig.targetSdkVersion
+        versionCode project.ext.android.defaultConfig.versionCode
+        versionName project.ext.android.defaultConfig.versionName
         multiDexEnabled true
+    }
+
+    lintOptions {
+        checkReleaseBuilds project.ext.android.lintOptions.checkReleaseBuilds
+        abortOnError project.ext.android.lintOptions.abortOnError
     }
 
     /**
@@ -64,10 +65,6 @@ android {
         ignoreAssetsPattern "!.svn:!.git:!.ds_store:!*.scc:.*:<dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
 
     compileOptions {
         encoding "utf-8"
@@ -84,11 +81,6 @@ android {
 
     // dex选项
     dexOptions {
-        /**
-         * Whether to enable the incremental mode for dx. This has many limitations and may not
-         * work. Use carefully.
-         */
-        incremental false
         /**
          * Sets the -JXmx* value when calling dx. Format should follow the 1024M pattern.
          */

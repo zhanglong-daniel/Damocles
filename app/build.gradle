@@ -47,15 +47,15 @@ android {
 
         release {
             signingConfig signingConfigs.release
-            zipAlignEnabled true
-            minifyEnabled false
+            zipAlignEnabled project.ext.android.buildTypes.release.zipAlignEnabled
+            minifyEnabled project.ext.android.buildTypes.release.minifyEnabled
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
             signingConfig signingConfigs.debug
-            zipAlignEnabled false
-            minifyEnabled false
+            zipAlignEnabled project.ext.android.buildTypes.debug.zipAlignEnabled
+            minifyEnabled project.ext.android.buildTypes.debug.minifyEnabled
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -67,10 +67,9 @@ android {
 
 
     compileOptions {
-        encoding "utf-8"
-        //  java版本，默认值是1.6
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        encoding project.ext.android.compileOptions.encoding
+        sourceCompatibility project.ext.android.compileOptions.sourceCompatibility
+        targetCompatibility project.ext.android.compileOptions.targetCompatibility
     }
 
     packagingOptions {
@@ -89,16 +88,8 @@ android {
         jumboMode = false
     }
 
-    /**
-     * 源文件目录设置
-     * AndroidSourceSet类型。
-     */
     sourceSets {
         main {
-//            manifest.srcFile 'src/main/AndroidManifest.xml'
-//            java.srcDirs = ['src/main/java']
-//            res.srcDirs = ['src/main/res']
-//            assets.srcDirs = ['src/main/assets']
             jniLibs.srcDirs = ['libs']
         }
     }

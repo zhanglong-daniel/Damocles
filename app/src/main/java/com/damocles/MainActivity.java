@@ -39,7 +39,7 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements DoubleClickExit.Callback {
+public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private LinearLayout mLinearLayout;
@@ -137,18 +137,19 @@ public class MainActivity extends AppCompatActivity implements DoubleClickExit.C
     @Override
     public void onBackPressed() {
         if (mDoubleClickExit == null) {
-            mDoubleClickExit = new DoubleClickExit(this);
-            mDoubleClickExit.setClickInterval(1000);
-            mDoubleClickExit.setClickTips("再按一次退出Damocles");
+            mDoubleClickExit = new DoubleClickExit.Builder(this)
+                    .setClickInterval(1500)
+                    .setClickTips("再按一次退出Damocles")
+                    .setCallback(new DoubleClickExit.Callback() {
+                        @Override
+                        public void onExit() {
+                            MainActivity.this.finish();
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }
+                    })
+                    .build();
         }
-        mDoubleClickExit.execute(this);
-    }
-
-    @Override
-    public void onExit() {
-        Log.e("fuck");
-        this.finish();
-        android.os.Process.killProcess(android.os.Process.myPid());
+        mDoubleClickExit.execute();
     }
 
     PowerManager.WakeLock wakeLock;

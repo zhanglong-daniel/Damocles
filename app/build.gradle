@@ -12,7 +12,7 @@ android {
         targetSdkVersion project.ext.android.defaultConfig.targetSdkVersion
         versionCode project.ext.android.defaultConfig.versionCode
         versionName project.ext.android.defaultConfig.versionName
-        multiDexEnabled true
+        multiDexEnabled project.ext.android.defaultConfig.multiDexEnabled
     }
 
     lintOptions {
@@ -60,17 +60,19 @@ android {
         }
     }
 
+    compileOptions {
+        encoding project.ext.android.compileOptions.encoding
+        sourceCompatibility project.ext.android.compileOptions.sourceCompatibility
+        targetCompatibility project.ext.android.compileOptions.targetCompatibility
+    }
+
     aaptOptions {
         noCompress 'foo', 'bar'
         ignoreAssetsPattern "!.svn:!.git:!.ds_store:!*.scc:.*:<dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"
     }
 
 
-    compileOptions {
-        encoding project.ext.android.compileOptions.encoding
-        sourceCompatibility project.ext.android.compileOptions.sourceCompatibility
-        targetCompatibility project.ext.android.compileOptions.targetCompatibility
-    }
+
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'

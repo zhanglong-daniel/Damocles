@@ -1,11 +1,11 @@
 package com.damocles;
 
-import android.app.Application;
+import com.damocles.common.base.CommonApplication;
 
 /**
  * Created by zhanglong02 on 16/9/8.
  */
-public class DamoclesApplication extends Application {
+public class DamoclesApplication extends CommonApplication {
 
     private static DamoclesApplication INSTANCE;
 

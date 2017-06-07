@@ -11,32 +11,29 @@ import android.text.TextUtils;
  */
 public final class Log {
 
-    enum Priority {
-        VERBOSE, DEBUG, INFO, WARN, ERROR, ASSERT
+    private Log() {
     }
 
-    private static String LOG_TAG = "damocles";
+    private static String TAG = "damocles";
 
     private static boolean LOG_ENABLE = true;
 
-    private static Priority ENABLE_PRIORITY = Priority.VERBOSE;
+    private static int ENABLE_PRIORITY = android.util.Log.VERBOSE;
 
-    public static void setEnablePriority(Priority priority) {
-        if (priority != null) {
-            ENABLE_PRIORITY = priority;
-        }
+    public static void setEnablePriority(int priority) {
+        ENABLE_PRIORITY = priority;
     }
 
-    public static void setLogTag(String tag) {
+    public static void setTag(String tag) {
         if (TextUtils.isEmpty(tag)) {
             throw new IllegalArgumentException("the log tag is null");
         } else {
-            LOG_TAG = tag;
+            TAG = tag;
         }
     }
 
-    public static void setLogEnable(boolean logEnable) {
-        LOG_ENABLE = logEnable;
+    public static void setLogEnable(boolean enable) {
+        LOG_ENABLE = enable;
     }
 
     public static int v(String msg) {
@@ -109,10 +106,10 @@ public final class Log {
     }
 
     private static int println(int priority, String tag, String msg, int stackLevel) {
-        if (!LOG_ENABLE || priority < ENABLE_PRIORITY.ordinal() + 2) {
+        if (!LOG_ENABLE || priority < ENABLE_PRIORITY) {
             return -1;
         }
-        tag = TextUtils.isEmpty(tag) ? LOG_TAG : (LOG_TAG + "_" + tag);
+        tag = TextUtils.isEmpty(tag) ? TAG : (TAG + "_" + tag);
         StackTraceElement stackTrace = (new Throwable()).getStackTrace()[stackLevel];
         String fileName = stackTrace.getFileName();
         String methodName = stackTrace.getMethodName();
@@ -142,7 +139,6 @@ public final class Log {
             }
             t = t.getCause();
         }
-
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         tr.printStackTrace(pw);

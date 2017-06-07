@@ -34,8 +34,8 @@ public class ScreenUtil {
         return density;
     }
 
-    public static int dp2px(Context context, float dp) {
-        return (int) (getDensity(context) * dp);
+    public static int dp2px(Context context, float dpValue) {
+        return (int) (getDensity(context) * dpValue + 0.5f);
     }
 
     private static DisplayMetrics getDisplayMetrics(Context context) {

@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -13,8 +15,10 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
+import android.os.StatFs;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 
 /**
  * Created by zhanglong02 on 16/8/1.
@@ -136,5 +140,44 @@ public final class CommonUtils {
             }
         }
         return null;
+    }
+
+    public static String getFileNameFromUrl(String url) {
+        if (TextUtils.isEmpty(url)) {
+            return null;
+        }
+        url = url.split("\\?")[0];
+        Pattern pattern = Pattern.compile("^.*/(.*)$");
+        Matcher matcher = pattern.matcher(url);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return null;
+    }
+
+    /**
+     * 获取可用存储空间大小（单位：byte）
+     *
+     * @param path
+     *
+     * @return
+     */
+    public static long getAvailableMemorySize(String path) {
+        try {
+            StatFs statFs = new StatFs(path);
+            long blockSize;
+            long availableBlocks;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                blockSize = statFs.getBlockSizeLong();
+                availableBlocks = statFs.getAvailableBlocksLong();
+            } else {
+                blockSize = statFs.getBlockSize();
+                availableBlocks = statFs.getAvailableBlocks();
+            }
+            return blockSize * availableBlocks;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 }

@@ -1,4 +1,4 @@
-package com.damocles.common.network.http;
+package com.damocles.common.network.callback;
 
 import java.util.List;
 import java.util.Map;

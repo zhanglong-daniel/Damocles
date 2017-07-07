@@ -1,6 +1,6 @@
 package com.damocles.common.base;
 
-import com.damocles.common.network.http.HttpManager;
+import com.damocles.common.network.HttpManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;

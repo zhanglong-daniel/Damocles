@@ -1,4 +1,4 @@
-package com.damocles.common.network.http;
+package com.damocles.common.network;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.damocles.common.network.http;
+package com.damocles.common.network;
 
 /**
  * Created by zhanglong02 on 16/12/2.

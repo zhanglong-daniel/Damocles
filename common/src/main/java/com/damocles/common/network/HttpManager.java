@@ -132,6 +132,7 @@ public final class HttpManager {
                         errorCallback(callback, url, "statusCode=" + statusCode);
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     errorCallback(callback, url, e.toString());
                 } finally {
                     response.close();
@@ -140,6 +141,7 @@ public final class HttpManager {
 
             @Override
             public void onFailure(Call call, final IOException e) {
+                e.printStackTrace();
                 errorCallback(callback, call.request().url().toString(), e.toString());
             }
         });
@@ -248,6 +250,7 @@ public final class HttpManager {
 
             @Override
             public void onFailure(Call call, final IOException e) {
+                e.printStackTrace();
                 downloadErrorCallback(downloadCallback, call.request().url().toString(), e.toString());
             }
 

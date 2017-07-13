@@ -100,8 +100,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':common')
     compile project.ext.dependencies["appcompat-v7"]
     compile project.ext.dependencies["support-v4"]
     compile project.ext.dependencies["design"]
+    compile 'com.github.zhanglong-daniel:damocles-common:1.0.1'
 }

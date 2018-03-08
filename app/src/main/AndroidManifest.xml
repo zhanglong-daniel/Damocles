@@ -56,8 +56,7 @@
 
         <activity android:name="com.damocles.sample.TTSActivity"/>
         <activity android:name="com.damocles.sample.PendulumActivity"/>
-        <activity android:name="com.damocles.sample.RecyclingViewPagerActivity"
-                  android:screenOrientation="landscape"/>
+        <activity android:name="com.damocles.sample.CustomDensityActivity"/>
 
         <service android:name="com.damocles.sample.service.MyService"/>
 

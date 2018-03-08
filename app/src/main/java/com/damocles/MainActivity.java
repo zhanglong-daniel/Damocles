@@ -11,6 +11,7 @@ import com.damocles.sample.BlueToothActivity;
 import com.damocles.sample.BroadcastActivity;
 import com.damocles.sample.CanvasAnimationActivity;
 import com.damocles.sample.CascadeLayoutActivity;
+import com.damocles.sample.CustomDensityActivity;
 import com.damocles.sample.LEDActivity;
 import com.damocles.sample.ListViewChoiceModeActivity;
 import com.damocles.sample.ListViewSectionActivity;
@@ -171,6 +172,10 @@ public class MainActivity extends AppCompatActivity {
             wakeLock = null;
         }
 
+    }
+
+    public void onCustomDensityClick(View view){
+        startActivity(new Intent(this, CustomDensityActivity.class));
     }
 
     public void onCustomNotificationClick(View view) {

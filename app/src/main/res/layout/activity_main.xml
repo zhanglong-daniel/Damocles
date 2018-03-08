@@ -30,6 +30,11 @@
                     android:text="LinearLayout size"
                     android:layout_margin="5dp"/>
 
+
+            <Button android:onClick="onCustomDensityClick"
+                    style="@style/Button.Main"
+                    android:text="custom density"/>
+
             <Button android:onClick="onCustomNotificationClick"
                     style="@style/Button.Main"
                     android:text="show custom notify"/>

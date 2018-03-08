@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply from: "${project.rootDir}/config.gradle"
 
+android_support_version = '25.0.0'
+
 android {
 
     compileSdkVersion project.ext.android.compileSdkVersion
